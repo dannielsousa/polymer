@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Estudo Polymer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  
+  <link rel="import" href="../bower_components/polymer/polymer.html">
+</head>
+<body>
+    <script type="text/javascript">
+        (function() {
+            /* 
+            Polymer({
+                is: 'my-element'
+            });
+
+            var myElement = document.createElement('my-element');
+            myElement.textContent = "Hello World!";
+            document.body.appendChild(myElement);
+            console.log(myElement);
+            */
+
+            var MyElement = Polymer({
+                is: 'my-element',
+                //É um padrão de design que se usa para criar algo. É Como se fosse o construtor do elemento.
+                //quando usa o construtor do factoryimplementation, ele só é chamado se fizer a criação do elemento com new.
+                //se criar com createElement, o factory não é chamado
+                factoryImpl: function(texto){ 
+                    this.textContent = texto;
+                } 
+            });
+
+            var myElement = document.createElement('my-element');
+            //myElement.textContent = "Hello World!";
+            document.body.appendChild(myElement);
+
+            //var myElement2 = new MyElement();
+            //myElement2.textContent = "Hello World2!";
+            //document.body.appendChild(myElement2);
+
+            var myElement2 = new MyElement("Hello World 2!");
+            document.body.appendChild(myElement2);
+
+        })();
+    </script>
+</body>
+</html>
