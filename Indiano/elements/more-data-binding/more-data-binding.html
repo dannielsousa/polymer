@@ -1,0 +1,27 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+
+<dom-module id="more-data-binding">
+    
+    <link rel="stylesheet" href="./my-style.css">
+        
+    <template>
+        <h1>More Data Binding</h1>
+        {{foo}}
+        <br>
+        {{apple}}
+    </template>
+    
+    <script>
+        Polymer({
+            is:'more-data-binding',
+            properties: {
+                foo: {
+                    type: String,
+                    notify: true
+                }
+            }
+        })
+    </script>
+
+</dom-module>

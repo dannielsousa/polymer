@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+
+<dom-module id="data-binding-oneway">
+
+    <link rel="stylesheet" href="./my-style.css">
+    
+    <template>
+        <div class="teste">
+            <h1>One Way Data Binding</h1>
+            {{foo}}
+            <br>
+            <input type="text" value="{{foo::input}}">
+        </div>
+    </template>
+    
+    <script>
+        Polymer({
+            is:'data-binding-oneway',
+            properties: {
+                foo: {
+                    type: String,
+                    value: "JUST DO IT",
+                    notify: true,
+                    readOnly: true
+                }
+            }
+        })
+    </script>
+
+</dom-module>

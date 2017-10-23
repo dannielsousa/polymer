@@ -1,0 +1,38 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+
+<dom-module id="life-cycle">
+
+    <link rel="stylesheet" href="./my-style.css">
+
+    <template>
+        <h1>My Element</h1>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'life-cycle',
+            created: function () {
+                console.log(this.localName + '#' + this.id + ' was created');
+            },
+
+            ready: function () {
+                console.log(this.localName + '#' + this.id + ' has local DOM initialized');
+            },
+
+            attached: function () {
+                console.log(this.localName + '#' + this.id + ' was attached');
+            },
+
+            detached: function () {
+                console.log(this.localName + '#' + this.id + ' was detached');
+            },
+
+            attributeChanged: function (name, type) {
+                console.log(this.localName + '#' + this.id + ' attribute ' + name +
+                    ' was changed to ' + this.getAttribute(name));
+            }
+        })
+    </script>
+
+</dom-module>

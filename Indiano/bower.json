@@ -1,0 +1,17 @@
+{
+  "name": "estudo",
+  "main": "index.html",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.7.0",
+    "app-route": "PolymerElements/app-route#^0.9.3",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "google-youtube": "GoogleWebComponents/google-youtube#^2.0.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "^4.0.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.2"
+  }
+}
