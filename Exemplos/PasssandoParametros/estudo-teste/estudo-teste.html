@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="./estudo-dois.html">
+<dom-module id="estudo-teste">
+
+    
+    <template>
+            <button on-tap="teste">Teste</button>
+            <estudo-dois></estudo-dois>
+    </template>
+    <script>
+        Polymer({
+            is:'estudo-teste',
+            properties: {
+                teste: {
+                    type: Object,
+                    value: {
+                        nome: String,
+                        sobrenome: String,
+                        ativo: Boolean
+                    }
+                }
+            },
+
+            ready: function() {
+                this.teste.nome = "Danniel",
+                this.teste.sobrenome = "Sousa",
+                this.teste.ativo = false
+            },
+
+            teste: function() {
+                console.log("aqui");
+                this.fire('add:new');
+                var x = this.$$('estudo-dois')._addNew('2');
+                console.log(x);
+            }
+
+        })
+    </script>
+</dom-module>

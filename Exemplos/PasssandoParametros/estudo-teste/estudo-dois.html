@@ -1,0 +1,21 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="estudo-dois"> 
+
+    
+    <template></template>
+    <script>
+        Polymer({
+            is: 'estudo-dois',
+
+            listeners: {
+                'add:new': '_addNew'
+            },
+            _addNew: function(y){
+                x = y + y;
+                return x;
+            }
+        });
+    </script>
+
+</dom-module>
