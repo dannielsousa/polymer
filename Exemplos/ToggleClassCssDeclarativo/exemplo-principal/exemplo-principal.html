@@ -1,0 +1,38 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="exemplo-principal">
+    <style>
+        .blue {
+            border: 10px solid blue;
+        }
+
+        .red {
+            border: 10px solid red;
+        }
+
+        #wrapper {
+            font-weight: bold;
+            font-size: 42px;
+        }
+    </style>
+    <template>
+        <div class$="{{computeClass(isBlue)}}">
+            <content></content>
+        </div>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: 'exemplo-principal',
+        properties: {
+            'isBlue': { type: Boolean, value: false }
+        },
+        listeners: { 'click': 'clickHandler' },
+        clickHandler: function () {
+            this.isBlue = !this.isBlue;
+        },
+        computeClass: function (f) {
+            return f ? "blue" : "red";
+        }
+    });
+</script>

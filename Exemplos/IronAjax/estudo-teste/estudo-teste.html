@@ -1,0 +1,21 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="estudo-teste">
+    <template>
+
+        <iron-ajax
+            auto
+            url="https://jsonplaceholder.typicode.com/users/1"
+            handle-as="json"
+            last-response="{{data}}">
+        </iron-ajax>
+        {{data.name}}
+
+    </template>
+    <script>
+        Polymer({
+            is:'estudo-teste',
+        })
+    </script>
+</dom-module>

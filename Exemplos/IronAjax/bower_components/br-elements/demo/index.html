@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>DEMO br-elements</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../br-elements.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      demo-snippet.horizontal {
+        --demo-snippet-demo: {
+          @apply(--layout-horizontal);
+          @apply(--layout-justified);
+          @apply(--layout-wrap);
+        }
+      }
+      demo-snippet.horizontal paper-input {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+    <h3>Inputs</h3>
+      <demo-snippet>
+        <template>
+          <br-tel-input></br-tel-input>
+          <br-cel-input></br-cel-input>
+          <br-cpf-input></br-cpf-input>
+          <br-cnpj-input></br-cnpj-input>
+          <br-cep-input></br-cep-input>
+        </template>
+      </demo-snippet>
+
+    <h3>Auto-validate</h3>
+      <demo-snippet>
+        <template>
+          <br-tel-input auto-validate></br-tel-input>
+          <br-cel-input auto-validate></br-cel-input>
+          <br-cpf-input auto-validate></br-cpf-input>
+          <br-cnpj-input auto-validate></br-cnpj-input>
+          <br-cep-input auto-validate></br-cep-input>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
