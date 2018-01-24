@@ -1,0 +1,51 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+
+<dom-module id="estudo-teste">
+    <style>
+        
+        #caixaPesquisa {
+            float: left;
+            width: 80%;
+            margin: 0 auto;
+            background: #ececec;
+            height: 100px;
+        }
+        .itemPesquisa {
+            width: 20px;
+            background: red;
+        }
+        paper-input {
+            float: left;
+            background: red;
+        }
+    </style>
+    <template>
+        <div id="caixaPesquisa" on-tap="addPesquisa">
+            <ul id="pesquisa">
+                <li>teste</li>
+            </ul>
+        </div>
+ 
+    </template>
+</dom-module>
+<script>
+
+    Polymer({
+        is: "estudo-teste",
+        properties: {
+        },
+        addPesquisa: function() {
+            var lista = document.getElementById('pesquisa').innerHTML;
+            lista += '<li><paper-input on-tap="teste" class="clique"></paper-input></li>';
+            var listaCompleta = '<ul id="pesquisa">' + lista + '</ul>'
+            document.getElementById('caixaPesquisa').innerHTML = listaCompleta;
+            document.getElementsByClassName('clique').addEventListener('touchstart', 'teste');
+        },
+        teste() {
+            alert('clicou aqui');
+        }
+    })
+    
+
+</script>

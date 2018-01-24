@@ -1,0 +1,33 @@
+
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="exemplo-principal">
+
+    <template>
+       
+    </template>
+
+    <script>
+        Polymer({
+            is: 'exemplo-principal',
+            ready: function () {
+              this.async(function () {
+                this.userExt = usuarioSessaoExt;
+                this.arrayTipo = [
+                  { 'valor': 'D', 'categoria': 'Dúvidas' },
+                  { 'valor': 'P', 'categoria': 'Problemas' },
+                  { 'valor': 'I', 'categoria': 'Sugestões' },
+                  { 'valor': 'G', 'categoria': 'Agradecimentos' },
+                ];
+                if (this.userExt.tipo == "Administrador") {
+                  var opcAdmin = { 'valor': 'A', 'categoria': 'Comunicados' };
+                  this.push('arrayTipo', opcAdmin)
+                }
+              }, 5000);
+            },
+        });
+    </script>
+
+
+</dom-module>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="basic polymer jsbin">
+    <meta charset="utf-8">
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    
+    <link rel="import" href="../bower_components/polymer/polymer.html">
+
+    <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+    <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="../bower_components/iron-scroll-threshold/iron-scroll-threshold.html">
+    <link rel="import" href="../bower_components/iron-list/iron-list.html">
+    <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+    <link rel="import" href="../bower_components/iron-image/iron-image.html">
+
+    <dom-module id="exemplo-principal">
+      <template>
+        
+        <style>
+          
+          :host {
+            
+          }
+          
+          app-toolbar {
+            height: 64px;
+            background-color: grey;
+          }
+          
+          iron-list {
+            flex: 1 1 auto;
+          }
+          
+          .container {
+            height: calc(100vh - 64px);
+            display: flex;
+            flex-direction: column;
+          }
+          
+        </style>
+
+        <iron-ajax id="ajax" 
+          url="https://randomuser.me/api/" 
+          handle-as="json" 
+          params='{"results": 20}'
+          loading="{{loadingPeople}}"
+          on-response="categoriesLoaded">
+        </iron-ajax>
+        
+        <app-toolbar>
+          <div main-title>Load data using iron-scroll-threshold</div>
+        </app-toolbar>
+        
+        
+        <div class="container">
+          <iron-scroll-threshold on-lower-threshold="loadMoreData" id="threshold">
+
+            <iron-list id="list" items="[[categoriesJobs]]" as="person" scroll-target="threshold">
+              <template>
+                <div>
+                  <div class="personItem" tabindex$="[[tabIndex]]">
+                    <iron-image class="avatar" sizing="contain" src="[[person.picture.medium]]"></iron-image>
+                    <div class="pad">
+                      <div class="primary">[[person.name.first]] [[person.name.last]]</div>
+                      <address>
+                        [[person.location.street]] [[person.city]] <br />
+                        [[person.location.city]], [[person.location.state]] [[person.location.postcode]]
+                      </address>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </iron-list>
+          </iron-scroll-threshold>
+        </div>
+        
+      </template>
+      <script>
+          Polymer({
+            
+            is: 'exemplo-principal',
+            
+            properties: {
+              
+              first: {
+                type: Boolean,
+                value: true
+              }
+              
+            },
+            
+            ready: function() {
+              
+            },
+            
+            attached: function() {
+              this.companyDetail = [];
+              this.categoriesJobs = [];
+            },
+            
+            loadMoreData: function () {
+              console.log('load more data');
+              this.$.ajax.generateRequest();
+            },
+            
+            categoriesLoaded: function (e) {
+              var self = this;
+              var people = e.detail.response.results;
+              people.forEach(function(element) {
+                self.push('categoriesJobs', element);
+              });
+              this.$.threshold.clearTriggers();
+              if (this.first) {
+                this.$.list.notifyResize();
+                this.first = false;
+              }
+            }
+          
+          });
+      </script>
+    </dom-module>
+
+  </head>
+  <body>
+    <test-app></test-app>
+  </body>
+</html>
