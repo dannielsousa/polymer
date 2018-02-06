@@ -1,0 +1,126 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="./dropdown-pesquisa.html">
+<dom-module id="estudo-teste">
+	<template>
+		<style>
+			.caixaPesquisa {
+				background: #ececec;
+				height: 100px;
+				margin: 0 auto;
+				width: 80%;
+			}
+
+			ul {
+				list-style: none;
+			}
+
+			li {
+				float: left;
+				margin-left: 5px;
+			}
+			.addInput {
+				float: left; 
+				margin-left:5px;
+				width: auto; 
+			}
+		</style>
+		
+		
+		<div class="caixaPesquisa" on-tap="addPesquisa">
+			<ul id="pesquisa">
+			</ul>
+		</div>
+		<p>
+			<paper-button on-tap="pesquisar">Vai</paper-button>
+		</p>
+	</template>
+</dom-module>
+<script>
+
+	Polymer({
+		is: "estudo-teste",
+		properties: {
+			tipoPesquisa: { type: String, notify: true, observer : 'pesquisaChange', value: '' }
+		},
+
+		addPesquisa: function (event) {
+			if (Polymer.dom(this.$$('#pesquisa')).lastChild.id != 'ddpesquisa') {
+				
+				let target;
+				let linha;
+
+				target = event.target.className;
+			
+				if (target.indexOf('caixaPesquisa') >= 0) {
+				
+					linha = document.createElement('li')
+					linha.setAttribute('id','ddpesquisa');
+					linha.innerHTML = '<dropdown-pesquisa tipo-pesquisa="{{tipoPesquisa}}"></dropdown-pesquisa>';
+					Polymer.dom(this.$$('#pesquisa')).appendChild(linha);
+			
+				}
+			}
+		},
+
+		//chamado quando há alteração no dropdown-pesquisa (selecção de alguma opção de pesquisa)
+		pesquisaChange(newValue, oldValue) {
+			if (newValue != '') {
+
+				let tipoPesquisa = newValue;
+				let novalinha;
+				let novoInput;
+				let inputs;
+				let id;
+				let qtdInput;
+
+				novaLinha = document.createElement('li');
+				novaLinha.setAttribute('id','linhaInputPesquisa');
+				Polymer.dom(this.$$('#pesquisa')).appendChild(novaLinha);
+
+				novoInput = document.createElement('paper-input');
+
+				inputs = Polymer.dom(this.root).querySelectorAll(".addInput");
+
+				if (!inputs.length) { 
+					id = 0;
+				}
+				else {
+					qtdInput = (inputs.length - 1);
+					id = inputs[qtdInput].id.split('-')[1];
+					id++;
+				}
+
+				novoInput.setAttribute('id',tipoPesquisa + '-' + id);
+				novoInput.setAttribute('class','addInput')
+				novoInput.setAttribute('label',tipoPesquisa);
+				Polymer.dom(this.$$('#linhaInputPesquisa')).appendChild(novoInput);
+
+				Polymer.dom(this.$$('#pesquisa')).removeChild(this.$$('#ddpesquisa'));
+
+				Polymer.dom(this.$$('#linhaInputPesquisa')).lastChild.focus();
+
+				this.tipoPesquisa = '';
+			}
+		},
+
+		pesquisar: function() {
+
+			let objPesquisa = {};
+			let arrayPesquisa = [];
+			let inputs = Polymer.dom(this.root).querySelectorAll(".addInput");
+			let tipoPesquisa;
+			let valor;
+
+			for (var i = 0; i < inputs.length; i++) {
+				tipoPesquisa = inputs[i].label;
+				valor = inputs[i].value;
+
+				objPesquisa = { 'pesquisa' :  tipoPesquisa + ' - ' + valor };
+				arrayPesquisa.push(objPesquisa);
+			}
+		}
+	})
+
+
+</script>
